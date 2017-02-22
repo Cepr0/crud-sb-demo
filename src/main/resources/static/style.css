@@ -1,0 +1,22 @@
+@media (max-width: 767px) {
+}
+
+table.fluid {
+    width: 100%;
+    margin: 0 8px 8px 0;
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
+
+table input[type="checkbox"] {
+    height: 15px;
+    width: 15px;
+    margin: auto;
+    position: inherit;
+    clip: inherit;
+    -webkit-clip-path: none;
+     clip-path: none;
+}
