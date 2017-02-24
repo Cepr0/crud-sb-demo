@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author Cepro, 2017-02-22
@@ -23,6 +24,12 @@ public class RootController {
         Iterable<User> users = repo.findAll();
         model.addAttribute("users", users);
         return "index";
+    }
+
+    @GetMapping("/user/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        model.addAttribute("user", repo.findOne(id));
+        return "edit";
     }
     
 }

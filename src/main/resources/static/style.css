@@ -2,21 +2,42 @@
 }
 
 table.fluid {
-    width: 100%;
-    margin: 0 8px 8px 0;
+  width: 100%;
+  margin: 0 8px 8px 0;
 }
 
 th {
-    font-weight: bold;
-    text-align: left;
+  font-weight: bold;
+  text-align: left;
 }
 
 table input[type="checkbox"] {
-    height: 15px;
-    width: 15px;
-    margin: auto;
-    position: inherit;
-    clip: inherit;
-    -webkit-clip-path: none;
-     clip-path: none;
+  height: 15px;
+  width: 15px;
+  margin: auto;
+  position: inherit;
+  clip: inherit;
+  -webkit-clip-path: none;
+  clip-path: none;
 }
+
+[type=checkbox], [type=radio] {
+  height: auto;
+  width: auto;
+  margin: 12px;
+  position: inherit;
+  clip: inherit;
+  -webkit-clip-path: none;
+  clip-path: none;
+}
+
+table:not(.preset) tr.data:hover td {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+tr.data:hover, td {
+  background-color: #eaeaea;
+  cursor: pointer;
+}
+
