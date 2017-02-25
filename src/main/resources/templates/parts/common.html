@@ -22,6 +22,13 @@
 <footer th:fragment="footer">
     <script src="/webjars/jquery/3.1.1/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $('body').keydown(function (e) {
+            if (e.which == 27) {
+                window.open('/', '_self');
+            }
+        })
+    </script>
 </footer>
 </body>
 </html>
