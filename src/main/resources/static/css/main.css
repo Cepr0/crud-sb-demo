@@ -17,7 +17,7 @@ tr.ROLE_ADMIN {
 
 input[readonly] {
     background-color: transparent !important;
-    opacity: 0 !important;
+    /*opacity: 0 !important;*/
     border: 0;
     box-shadow: none;
     padding-left: 0;
