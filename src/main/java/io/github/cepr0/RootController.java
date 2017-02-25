@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 /**
  * @author Cepro, 2017-02-22
  */
@@ -22,6 +25,7 @@ public class RootController {
     public String users(Model model) {
         Iterable<User> users = repo.findAll();
         model.addAttribute("users", users);
+        model.addAttribute("search", "");
         return "users";
     }
 
@@ -48,5 +52,14 @@ public class RootController {
         User user = new User();
         model.addAttribute("user", user);
         return "edit";
+    }
+    
+    @PostMapping("/filter")
+    public String search(HttpServletRequest req, Model model) {
+        String search = req.getParameter("search");
+        List<User> users = repo.findByNameAndEmail(search);
+        model.addAttribute("users", users);
+        model.addAttribute("search", search);
+        return "users";
     }
 }

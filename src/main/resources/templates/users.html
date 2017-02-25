@@ -6,14 +6,14 @@
 <body>
 <!--/*/ <th:block th:include="parts/common :: header"></th:block> /*/-->
 <div class="container">
-
+    
     <div class="panel panel-default">
-
+        
         <div class="panel-heading">
             <h1 class="panel-title text-uppercase">
                 <span class="glyphicon glyphicon-user"></span> Users
                 <a th:href="${'/user'}" class="btn btn-primary btn-xs pull-right" style="color: white">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>  New user
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New user
                 </a>
             </h1>
         </div>
@@ -41,10 +41,38 @@
             </table>
         
         </div>
-
+        
+        <div class="panel-footer">
+            <form action="/filter" method="post">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <div class="input-group input-group-sm">
+                            
+                            <span class="input-group-addon" id="sizing-addon3">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input th:value="${search}" id="search" name="search" type="text" class="form-control" aria-describedby="sizing-addon3"
+                                   placeholder="Type the part of User name or email to search and hit 'Enter'"/>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                        <a href="/" class="btn btn-default btn-sm">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    
     </div>
 
 </div>
 <!--/*/ <th:block th:include="parts/common :: footer"></th:block> /*/-->
+<script>
+    $('body').keydown(function (e) {
+        if (e.which == 27) {
+            window.open('/', '_self');
+        }
+    })
+</script>
 </body>
 </html>
