@@ -32,9 +32,7 @@ public class User {
     }
     
     public User() {
-        enabled = enabled != null ? enabled : true;
-        registered = registered != null ? registered : LocalDateTime.now();
-        role = role != null ? role : Role.ROLE_USER;
+        this(null, null, null);
     }
     
     public User(String name, String email, String password) {

@@ -29,13 +29,15 @@ public class Application {
             User u1 = repo.save(new User("Вася Пупкин", "vasya@demo.com", "123456"));
             u1.setRole(User.Role.ROLE_ADMIN);
             repo.save(u1);
+            
             repo.save(new User("Лева Задов", "leva@demo.com", "123456"));
+            
             User u2 = repo.save(new User("Коля Петров", "kolya@demo.com", "123456"));
             u2.setEnabled(false);
             u2.setRole(User.Role.ROLE_ADMIN);
             repo.save(u2);
+
             repo.save(new User("Сема Заднер", "sema@demo.com", "123456"));
-            
         };
     }
 }
