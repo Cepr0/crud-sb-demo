@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--/*/ <th:block th:include="parts/common :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="parts/common :: header"></th:block> /*/-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h2 class="panel-title">USER</h2>
+                </div>
+                <div class="panel-body">
+                    <form th:object="${user}" th:action="@{/user}" method="post">
+                        <input th:field="*{id}" class="form-control" type="hidden" id="id" name="id"/>
+
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="name">User name</label>
+                                <input th:field="*{name}" type="text" class="form-control" id="name" name="name"
+                                       placeholder="User name"/>
+                            </div>
+                            
+                            <div class="form-group col-sm-6">
+                                <label for="email">Email address</label>
+                                <input th:field="*{email}" type="email" class="form-control" id="email" name="enail"
+                                       placeholder="Email"/>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="password">Password</label>
+                                <input th:field="*{password}" type="password" class="form-control" id="password" name="password"
+                                       placeholder="Password"/>
+                            </div>
+                            
+                            <div class="form-group col-sm-6">
+                                <label for="role">Role</label>
+                                <select th:field="*{role}" class="form-control" id="role" name="role">
+                                    <option th:value="ROLE_USER">ROLE_USER</option>
+                                    <option th:value="ROLE_ADMIN">ROLE_ADMIN</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group col-sm-6">
+                                <label for="registered">Registered</label>
+                                <input
+                                        th:readonly="true"
+                                        th:field="*{registered}"
+                                        type="text" class="form-control" id="registered" name="registered" placeholder="Registered"/>
+                                <!--th:value="${#temporals.format(user.registered, 'yyyy-MM-dd HH:mm')}"-->
+                                <!--<p class="form-control-static">-->
+                                    <!--<span th:name="registered" id="registered" th:text="${#temporals.format(user.registered, 'yyyy-MM-dd HH:mm')}"></span>-->
+                                <!--</p>-->
+                            </div>
+
+                            <div class="checkbox col-sm-6">
+                                <label>
+                                    <input th:checked="*{enabled}" type="checkbox" th:field="*{enabled}" id="enabled" name="enabled"/> Enabled
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <hr/>
+                        <button
+                                type="submit" class="btn btn-primary"
+                                th:onclick="|$.put('${'/user/' + user.id}')|">
+                            Save
+                        </button>
+                        <button type="reset" class="btn btn-default" onclick="window.open('/','_self')">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/*/ <th:block th:include="parts/common :: footer"></th:block> /*/-->
+</body>
+</html>

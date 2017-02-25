@@ -3,7 +3,6 @@ package io.github.cepr0;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -28,11 +27,14 @@ public class User {
     
     private Role role;
     
-    private enum Role {
+    public enum Role {
         ROLE_USER, ROLE_ADMIN
     }
     
     public User() {
+        enabled = enabled != null ? enabled : true;
+        registered = registered != null ? registered : LocalDateTime.now();
+        role = role != null ? role : Role.ROLE_USER;
     }
     
     public User(String name, String email, String password) {
@@ -46,6 +48,10 @@ public class User {
     
     public Integer getId() {
         return id;
+    }
+    
+    public void setId(Integer id) {
+        this.id = id;
     }
     
     public String getName() {

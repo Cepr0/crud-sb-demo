@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author Cepro, 2017-02-22
@@ -20,10 +21,10 @@ public class RootController {
     }
     
     @GetMapping("/")
-    public String index(Model model) {
+    public String users(Model model) {
         Iterable<User> users = repo.findAll();
         model.addAttribute("users", users);
-        return "index";
+        return "users";
     }
 
     @GetMapping("/user/{id}")
@@ -32,4 +33,9 @@ public class RootController {
         return "edit";
     }
     
+    @PostMapping("/user")
+    public String save(User user) {
+        repo.save(user);
+        return "redirect:/";
+    }
 }
