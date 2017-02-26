@@ -22,3 +22,8 @@ input[readonly] {
     box-shadow: none;
     padding-left: 0;
 }
+
+.pagination {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

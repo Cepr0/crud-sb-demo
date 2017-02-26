@@ -38,6 +38,15 @@ public class Application {
             repo.save(u2);
 
             repo.save(new User("Сема Заднер", "sema@demo.com", "123456"));
+    
+            repo.save(new User("Frodo Baggins", "frodo@demo.com", "123456"));
+            repo.save(new User("Gandalf the Grey", "gandalf@demo.com", "123456"));
+            repo.save(new User("Sam Gamgee", "sam@demo.com", "123456"));
+            repo.save(new User("Merry Brandybuck", "marry@demo.com", "123456"));
+            repo.save(new User("Pippin Took", "pippin@demo.com", "123456"));
+            repo.save(new User("Aragorn", "aragorn@demo.com", "123456"));
+            repo.save(new User("Legolas", "legolas@demo.com", "123456"));
+            repo.save(new User("Gimli", "gimli@demo.com", "123456"));
         };
     }
 }

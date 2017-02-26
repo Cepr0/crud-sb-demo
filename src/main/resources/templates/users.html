@@ -20,6 +20,7 @@
         
         <div class="panel-body">
             
+            <!-- User table -->
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -39,9 +40,21 @@
                     <td data-label="User role" th:text="${user.role}">Role</td>
                 </tr>
             </table>
-        
+    
+            <!-- Pagination-->
+            <nav>
+                <ul class="pagination pagination-sm">
+                    <li th:each="i : ${#numbers.sequence(0, totalPages-1)}" th:class="${(current == i)}? 'active'" >
+                        <a th:href="${'/?page='+i}">
+                            <span th:text="${i}"></span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
         </div>
         
+        <!-- Filter -->
         <div class="panel-footer">
             <form action="/filter" method="post">
                 <div class="row">
