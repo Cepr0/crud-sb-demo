@@ -44,19 +44,20 @@
             <!-- Pagination-->
             <nav>
                 <ul class="pagination pagination-sm">
-                    <li th:each="i : ${#numbers.sequence(0, totalPages-1)}" th:class="${(current == i)}? 'active'" >
-                        <a th:href="${'/?page='+i}">
+                    <li th:each="i : ${#numbers.sequence(0, (totalPages > 0) ? totalPages-1 : 0)}"
+                        th:class="${(current == i)}? 'active'" th:classappend="${totalPages lt 2}? 'hidden'">
+                        
+                        <a th:href="(${query} != null) ? @{/(page=${i}, q=${query})} : @{/(page=${i})}">
                             <span th:text="${i}"></span>
                         </a>
                     </li>
                 </ul>
             </nav>
-            
         </div>
         
         <!-- Filter -->
         <div class="panel-footer">
-            <form action="/filter" method="post">
+            <form action="/" method="get">
                 <div class="row">
                     <div class="col-xs-6">
                         <div class="input-group input-group-sm">
@@ -64,13 +65,13 @@
                             <span class="input-group-addon" id="sizing-addon3">
                                 <span class="glyphicon glyphicon-search"></span>
                             </span>
-                            <input th:value="${search}" id="search" name="search" type="text" class="form-control" aria-describedby="sizing-addon3"
+                            <input th:value="${query}" id="query" name="q" type="text" class="form-control" aria-describedby="sizing-addon3"
                                    placeholder="Type the part of User name or email to search and hit 'Enter'"/>
                         </div>
                     </div>
                     <div class="col-xs-6">
-                        <button type="submit" class="btn btn-primary btn-sm">Search</button>
-                        <a href="/" class="btn btn-default btn-sm">Cancel</a>
+                        <button type="submit" class="btn btn-primary btn-sm">Search (Enter)</button>
+                        <a href="/" class="btn btn-default btn-sm">Reset (Esc)</a>
                     </div>
                 </div>
             </form>
