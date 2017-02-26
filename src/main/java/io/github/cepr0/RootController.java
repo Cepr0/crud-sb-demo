@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import static org.springframework.data.domain.Sort.Direction.ASC;
 
 /**
@@ -30,21 +33,21 @@ public class RootController {
     }
     
     @GetMapping("/")
-    public String users(@RequestParam(value = "q", required = false) String query, Model model, @PageableDefault(size = PAGE_SIZE, sort = SORT, direction = ASC) Pageable pageable) {
+    public String users(
+            @RequestParam(value = "q", required = false) String query,
+            Model model,
+            @PageableDefault(size = PAGE_SIZE, sort = SORT, direction = ASC) Pageable pageable
+    ) {
         Page<User> users = repo.findByNameAndEmail((query != null) ? query : "", pageable);
         model.addAttribute("users", users);
         model.addAttribute("query", query);
-        setPageData(model, pageable, users);
-        return "users";
-    }
-    
-    private void setPageData(Model model, Pageable pageable, Page<User> users) {
-        model.addAttribute("totalElements", users.getTotalElements());
+
         model.addAttribute("totalPages", users.getTotalPages());
-        model.addAttribute("pageSize", pageable.getPageSize());
         model.addAttribute("current", pageable.getPageNumber());
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
+
+        return "users";
     }
     
     @GetMapping("/user/{id}")
@@ -56,7 +59,11 @@ public class RootController {
     @PostMapping("/user")
     public String save(User user) {
         repo.save(user);
-        return "redirect:/?q=" + user.getName();
+        try {
+            return "redirect:/?q=" + URLEncoder.encode(user.getName(), "UTF8");
+        } catch (UnsupportedEncodingException ignore) {
+            return "redirect:/";
+        }
     }
     
     @GetMapping("/user/delete/{id}")
@@ -71,14 +78,4 @@ public class RootController {
         model.addAttribute("user", user);
         return "edit";
     }
-    
-    // @PostMapping("/filter")
-    // @RequestMapping(value = "/filter", method = {POST, GET})
-    // public String filter(@RequestParam("query") String query, Model model, @PageableDefault(size = PAGE_SIZE, sort = SORT, direction = ASC) Pageable pageable) {
-    //     Page<User> users = repo.findByNameAndEmail(query, pageable);
-    //     model.addAttribute("users", users);
-    //     model.addAttribute("query", query);
-    //     setPageData(model, pageable, users);
-    //     return "users";
-    // }
 }
