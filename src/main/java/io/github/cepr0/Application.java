@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 @SpringBootApplication
 public class Application {
@@ -12,6 +13,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
     
+    @Profile("!test")
     @Bean
     public CommandLineRunner demo(UserRepo repo) {
         return args -> {

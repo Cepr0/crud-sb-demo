@@ -14,5 +14,5 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     List<User> findByNameContainingIgnoreCase(String name);
     
     @Query("select u from User u where lower(concat(u.name, u.email)) like concat('%', lower(?1), '%')")
-    Page<User> findByNameAndEmail(String search, Pageable pageable);
+    Page<User> findByNameOrEmail(String search, Pageable pageable);
 }

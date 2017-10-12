@@ -6,10 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -38,7 +35,7 @@ public class RootController {
             Model model,
             @PageableDefault(size = PAGE_SIZE, sort = SORT, direction = ASC) Pageable pageable
     ) {
-        Page<User> users = repo.findByNameAndEmail((query != null) ? query : "", pageable);
+        Page<User> users = repo.findByNameOrEmail((query != null) ? query : "", pageable);
         model.addAttribute("users", users);
         model.addAttribute("query", query);
 
@@ -57,7 +54,7 @@ public class RootController {
     }
     
     @PostMapping("/user")
-    public String save(User user) {
+    public String save(@ModelAttribute User user) {
         repo.save(user);
         try {
             return "redirect:/?q=" + URLEncoder.encode(user.getName(), "UTF8");
